@@ -1,23 +1,26 @@
 <html>
 	<head>
+		<title>Casa do Código</title>
 	</head>
 	<body>
 		<table border="1px">
 			<thead>
 				<tr>
-					<td>id</td>
-					<td>Nome</td>
+					<td>Código</td>
+					<td>Título</td>
+					<td>Descrição</td>
+					<td>Preço</td>
 				</tr>					
 			</thead>
 			<tbody>
-				<tr>
-					<td>1</td>
-					<td>Livro de Node Js</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>A Espera De Um Milagre</td>
-				</tr>				
+				<%for (var i=0; i<lista.length; i++) {%>
+					<tr>
+						<td><%=lista[i].id%></td>
+						<td><%=lista[i].titulo%></td>
+						<td><%=lista[i].descricao%></td>
+						<td><%=lista[i].preco%></td>
+					</tr>
+				<% } %>				
 			</tbody>
 		</table>
 	</body>

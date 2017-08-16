@@ -1,22 +1,34 @@
+var connectionFactory = require('../infra/connectionFactory');
 
 module.exports = function(app) {
-	
-	return app.get('/produtos', function(req, res){
+    app.get("/produtos",function(req, res) {
+        var mysql = require('mysql');
+        
+        var connection = connectionFactory();
 
-		var mysql = require('mysql');
-		var connection = mysql.createConnection({
-			host : 'localhost',
-			user : 'root',
-			password : '',
-			database : 'casadocodigo_nodejs',
+        connection.connect(function (error) {
 
-		});
+        	if(!!error) {
 
-		connection.query( 'select * from livros', function(err, results) {
+        		console.log('Error');
+        	} else {
 
-			res.send(results);
-		});
-		
-		connection.end();
-	});	
+        		console.log('Connected');
+        	}
+        });
+
+        connection.query('select * from livros', function(err, results) {
+
+        	if(!!err) {
+
+	            console.log(err);
+        	} else {
+
+	            res.render('produtos/lista',{lista:results});
+        	}
+        });
+
+        connection.end();
+
+    });
 }
